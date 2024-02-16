@@ -8,6 +8,7 @@ import useAppSupplies from "./hooks/useAppSupplies.tsx";
 import useAppToast from "./hooks/useAppToast.tsx";
 import useChainSelector from "./hooks/useChainSelector.tsx";
 import useEthersSigner from "./hooks/useEthersSigner.tsx";
+import useWallet from "./hooks/useWallet.tsx";
 
 const BurnPageStyled = styled.div``;
 

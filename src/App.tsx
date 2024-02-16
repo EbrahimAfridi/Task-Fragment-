@@ -9,13 +9,25 @@ import useAppToast from "./hooks/useAppToast.tsx";
 import useChainSelector from "./hooks/useChainSelector.tsx";
 import useEthersSigner from "./hooks/useEthersSigner.tsx";
 import useWallet from "./hooks/useWallet.tsx";
+import {fetchAddressForChain} from "./utils/apiUtils.ts";
+import styled from "styled-components";
 
-const BurnPageStyled = styled.div``;
+// const BurnPageStyled = styled.div``;
+const DashboardLayoutStyled = styled.div``;
 
 enum BurnTxProgress {
     default = "Burn App Tokens",
     burning = "Burning...",
 }
+
+const chainEnum = {
+    mainnet: 1,
+    avalanche: 43114,
+    fantom: 250,
+    sepolia: 1,
+    avalancheFuji: 1,
+    fantomTestnet: 1,
+};
 
 const App = () => {
     const {
@@ -65,6 +77,16 @@ const App = () => {
     );
 
     const [coinData, setCoinData] = useState<any>({});
+
+    const CoinGeckoApi = {
+        fetchCoinData: async () => {
+            const response = await fetch(
+                `BASE_URL/coins/ethereum/contract/${tokenAddress}`
+            );
+            return response.json();
+        },
+    };
+
     useEffect(() => {
         CoinGeckoApi.fetchCoinData()
             .then((data: any) => {
@@ -197,7 +219,7 @@ const App = () => {
                         suppliesChain={suppliesChain}
                         statsSupplies={statsSupplies}
                         allSupplies={allSupplies}
-                        chainTokenSymbols={chainTokenSymbols}
+                        chainTokenSymbols={"chainTokenSymbols"}
                     />
 
                 </div>

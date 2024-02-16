@@ -16,18 +16,16 @@ const ChainSelectorComponent: React.FC<ChainSelectorProps> = (
         selectedChain,
         setSelectedChain,
     }) => {
-
     // Fake filler component
-
     return (
         <div>
             {/*fake p tags*/}
             <p>{title}</p>
             <p>{openChainSelector}</p>
-            <p>{setOpenChainSelector}</p>
+            {/*<p>{setOpenChainSelector}</p>*/}
             <p>{chains}</p>
             <p>{selectedChain}</p>
-            <p>{setSelectedChain}</p>
+            {/*<p>{setSelectedChain}</p>*/}
         </div>
     );
 };

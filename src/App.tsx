@@ -3,8 +3,9 @@ import ChainSelectorComponent from "../components/ChainSelector.tsx";
 import AppToast from "../ui/AppToast.tsx";
 import BurnStatsContainer from "../components/BurnStatsContainer.tsx";
 import BurnButtonBar from "../components/BurnButtonBar.tsx";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import useAppSupplies from "./hooks/useAppSupplies.tsx";
+import useAppToast from "./hooks/useAppToast.tsx";
 
 const BurnPageStyled = styled.div``;
 
@@ -38,6 +39,7 @@ const App = () => {
     const [burnTransactions, setBurnTransactions] = useState<any[]>([]);
     const [isOldToken, setIsOldToken] = useState(false);
     const [burnAmount, setBurnAmount] = useState("");
+
     const {toastMsg, toastSev, showToast} = useAppToast();
     const ethersSigner = useEthersSigner({
         chainId: walletChain?.id ?? chainEnum.mainnet,

@@ -1,8 +1,8 @@
-import TransactionTable from "../components/TransactionTableStyled.tsx";
-import ChainSelectorComponent from "../components/ChainSelector.tsx";
-import AppToast from "../ui/AppToast.tsx";
-import BurnStatsContainer from "../components/BurnStatsContainer.tsx";
-import BurnButtonBar from "../components/BurnButtonBar.tsx";
+import TransactionTable from "../after/components/TransactionTableStyled.tsx";
+import ChainSelectorComponent from "../after/components/ChainSelector.tsx";
+import AppToast from "../after/ui/AppToast.tsx";
+import BurnStatsContainer from "../after/components/BurnStatsContainer.tsx";
+import BurnButtonBar from "../after/components/BurnButtonBar.tsx";
 import {useEffect, useState} from "react";
 import useAppSupplies from "./hooks/useAppSupplies.tsx";
 import useAppToast from "./hooks/useAppToast.tsx";
@@ -140,7 +140,6 @@ const App = () => {
         setTxProgress(true);
         try {
             const burnTx = await oftTokenContract.burn(
-                //tokenAddress,
                 amount
             );
             setBurnTxHash(burnTx.hash);
@@ -161,19 +160,17 @@ const App = () => {
 
     useEffect(() => {
         if (!walletChain) return;
-        //console.log(suppliesChain);
+
         let isSubscribed = true;
-        // const newTokenAddress = fetchAddressForChain(
-        //   walletChain?.id,
-        //   isOldToken ? "oldToken" : "newToken"
-        // );
         if (isSubscribed) setBurnTransactions([]);
+
         const isTestnet = isChainTestnet(walletChain?.id);
         let _chainObjects: any[] = [mainnet, avalanche, fantom];
+
         if (isTestnet) _chainObjects = [sepolia, avalancheFuji, fantomTestnet];
+
         Promise.all(ChainScanner.fetchAllTxPromises(isTestnet))
             .then((results: any) => {
-                //console.log(results, isTestnet);
                 if (isSubscribed) {
                     let new_chain_results: any[] = [];
                     results.forEach((results_a: any[], index: number) => {
@@ -201,11 +198,14 @@ const App = () => {
 
     return (
         <div>
+
             <DashboardLayoutStyled className="burnpage">
+
                 <div
                     className="top_conatiner burnpage"
                     style={{alignItems: "flex-start"}}
                 >
+
                     <div className="info_box filled">
                         <h1 className="title">App TOKEN BURN</h1>
                         <p className="description medium"></p>
@@ -223,6 +223,7 @@ const App = () => {
                     />
 
                 </div>
+
             </DashboardLayoutStyled>
 
             <TransactionTable burnTransactions={burnTransactions} coinData={coinData} />
@@ -235,11 +236,13 @@ const App = () => {
                 selectedChain={suppliesChain}
                 setSelectedChain={setSuppliesChain}
             />
+
             <AppToast
                 position={{ vertical: 'bottom', horizontal: 'center' }}
                 message={toastMsg}
                 severity={toastSev}
             />
+
         </div>
     );
 };

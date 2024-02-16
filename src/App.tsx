@@ -6,6 +6,8 @@ import BurnButtonBar from "../components/BurnButtonBar.tsx";
 import {useEffect, useState} from "react";
 import useAppSupplies from "./hooks/useAppSupplies.tsx";
 import useAppToast from "./hooks/useAppToast.tsx";
+import useChainSelector from "./hooks/useChainSelector.tsx";
+import useEthersSigner from "./hooks/useEthersSigner.tsx";
 
 const BurnPageStyled = styled.div``;
 
@@ -26,7 +28,11 @@ const App = () => {
         openConnectModal,
     } = useWallet();
 
-    const {openChainSelector, setOpenChainSelector, openChainSelectorModal} = useChainSelector();
+    const {
+        openChainSelector,
+        setOpenChainSelector,
+        openChainSelectorModal
+    } = useChainSelector();
 
     const {
         supplies,
